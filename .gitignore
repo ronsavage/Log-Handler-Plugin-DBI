@@ -19,4 +19,5 @@ nytprof.out
 *.o
 *.bs
 /_eumm/
-/Config-Tiny-
+/-
+/Log-Handler-Plugin-DBI-
