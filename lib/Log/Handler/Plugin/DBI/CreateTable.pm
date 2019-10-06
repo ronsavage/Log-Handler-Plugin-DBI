@@ -8,13 +8,39 @@ use Carp;
 use DBIx::Admin::CreateTable;
 use DBIx::Connector;
 
-use Hash::FieldHash ':all';
+use Moo;
 
-fieldhash my %config      => 'config';
-fieldhash my %connector   => 'connector';
-fieldhash my %creator     => 'creator';
-fieldhash my %engine      => 'engine';
-fieldhash my %time_option => 'time_option';
+has config =>
+(
+	default		=> sub{return {} },
+	is			=> 'rw',
+	isa			=> HashRef,
+	required	=> 0,
+);
+
+has creator =>
+(
+	default		=> sub{return {} },
+	is			=> 'rw',
+	isa			=> HashRef,
+	required	=> 0,
+);
+
+has engine =>
+(
+	default		=> sub{return {} },
+	is			=> 'rw',
+	isa			=> HashRef,
+	required	=> 0,
+);
+
+has time_option =>
+(
+	default		=> sub{return {} },
+	is			=> 'rw',
+	isa			=> HashRef,
+	required	=> 0,
+);
 
 our $VERSION = '1.03';
 

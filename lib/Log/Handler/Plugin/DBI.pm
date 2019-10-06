@@ -5,11 +5,6 @@ use warnings;
 
 use Log::Handler::Output::DBI;
 
-use vars qw(@EXPORT @ISA);
-
-@EXPORT = (qw/configure_logger log log_object/);
-@ISA    = ('Exporter');
-
 my($object);
 
 our $VERSION = '1.03';
@@ -220,42 +215,6 @@ It is not needed; it would be for documentation only.
 
 For the record, Exporter V 5.567 ships with Perl 5.8.0. That's what I had in Build.PL and Makefile.PL until I tested the fact I can omit it.
 
-=head1 See Also
-
-L<CGI::Application>
-
-The following are all part of this set of distros:
-
-L<CGI::Snapp> - A almost back-compat fork of CGI::Application
-
-=head1 See Also
-
-L<CGI::Application>
-
-The following are all part of this set of distros:
-
-L<CGI::Snapp> - A almost back-compat fork of CGI::Application
-
-L<CGI::Snapp::Demo::One> - A template-free demo of CGI::Snapp using just 1 run mode
-
-L<CGI::Snapp::Demo::Two> - A template-free demo of CGI::Snapp using N run modes
-
-L<CGI::Snapp::Demo::Three> - A template-free demo of CGI::Snapp using the forward() method
-
-L<CGI::Snapp::Demo::Four> - A template-free demo of CGI::Snapp using Log::Handler::Plugin::DBI
-
-L<CGI::Snapp::Demo::Four::Wrapper> - A wrapper around CGI::Snapp::Demo::Four, to simplify using Log::Handler::Plugin::DBI
-
-L<Config::Plugin::Tiny> - A plugin which uses Config::Tiny
-
-L<Config::Plugin::TinyManifold> - A plugin which uses Config::Tiny with 1 of N sections
-
-L<Data::Session> - Persistent session data management
-
-L<Log::Handler::Plugin::DBI> - A plugin for Log::Handler using Log::Hander::Output::DBI
-
-L<Log::Handler::Plugin::DBI::CreateTable> - A helper for Log::Hander::Output::DBI to create your 'log' table
-
 =head1 Machine-Readable Change Log
 
 The file CHANGES was converted into Changelog.ini by L<Module::Metadata::Changes>.
@@ -264,10 +223,9 @@ The file CHANGES was converted into Changelog.ini by L<Module::Metadata::Changes
 
 Version numbers < 1.00 represent development versions. From 1.00 up, they are production versions.
 
-=head1 Credits
+=head1 Repository
 
-Please read L<https://metacpan.org/module/CGI::Application::Plugin::Config::Simple#AUTHOR>, since a lot of the ideas for this module were copied from
-L<CGI::Application::Plugin::Config::Simple>.
+L<https://github.com/ronsavage/Log-Handler-Plugin-DBI.git>
 
 =head1 Support
 
