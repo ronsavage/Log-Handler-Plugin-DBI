@@ -1,3 +1,8 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
 use Config::Plugin::Tiny; # For config_tiny().
 
 use Log::Handler::Plugin::DBI; # For configure_logger() and log_object().
