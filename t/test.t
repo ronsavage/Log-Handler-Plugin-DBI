@@ -17,6 +17,6 @@ my($config) = config_tiny(undef, 't/config.logger.conf');
 
 configure_logger(undef, $$config{logger});
 
-isa_ok(log_object, 'Log::Handler::Output::DBI', 'log_object');
+isa_ok(log_object(), 'Log::Handler::Output::DBI', 'log_object');
 
 log(undef, {'notice' => 'One'});
