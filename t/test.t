@@ -19,4 +19,4 @@ configure_logger(undef, $$config{logger});
 
 isa_ok(log_object, 'Log::Handler::Output::DBI', 'log_object');
 
-log(undef, notice => 'One');
+$log_object -> log(undef, notice => 'One');
