@@ -14,6 +14,8 @@ use Config::Plugin::Tiny;
 use DBD::SQLite;
 use DBIx::Admin::CreateTable;
 use DBIx::Connector;
+use File::HomeDir;
+use File::Spec;
 use Log::Handler::Output::DBI;
 use Moo;
 use strict;
@@ -33,6 +35,8 @@ my(@modules) = qw
 	DBD::SQLite
 	DBIx::Admin::CreateTable
 	DBIx::Connector
+	File::HomeDir
+	File::Spec
 	Log::Handler::Output::DBI
 	Moo
 	strict
