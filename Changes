@@ -5,7 +5,7 @@ Revision history for Perl extension Log::Handler::Plugin::DBI.
 		http://savage.net.au/Ron/html/My.Workflow.for.Building.Distros.html.
 	- Rename CHANGES to Changes
 	- Move t/pod.t to xt/author/pod.t.
-	- Add t/00.versions.t t/00.versions.tx.
+	- Add t/00.versions.t and t/00.versions.tx.
 
 1.02  2012-11-17T10:31:00
 	- Use File::Spec -> catfile('t', 'x.pl') instead of 't/x.pl' in tests and in POD.
