@@ -70,7 +70,7 @@ Then:
 
 	use File::Spec;
 
-	use Log::Handler::Plugin::DBI; # For configure_logger() and log().
+	use Log::Handler::Plugin::DBI; # For configure_logger() and write2log().
 
 	# ------------------------------------------------
 
