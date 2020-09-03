@@ -1,5 +1,8 @@
 Revision history for Perl extension Log::Handler::Plugin::DBI.
 
+1.04  2020-09-03T17:02:10
+	- Rename log() to write2log() to stop it clashing with Perl's built-in log().
+	- Reformat the comments in DBI.pm to be less than 100 chars long. This is my standard.
 1.03  2019-09-30T11:10:22
 	- Adopt new repo structure. See
 		http://savage.net.au/Ron/html/My.Workflow.for.Building.Distros.html.

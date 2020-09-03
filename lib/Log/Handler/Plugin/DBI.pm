@@ -7,7 +7,7 @@ use Log::Handler::Output::DBI;
 
 my($object);
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 # -----------------------------------------------
 
@@ -29,16 +29,6 @@ sub configure_logger
 
 # -----------------------------------------------
 
-sub log
-{
-	my($self, $level, $s) = @_;
-
-	$object -> log(level => $level, message => $s || '');
-
-} # End of log.
-
-# -----------------------------------------------
-
 sub log_object
 {
 	my($self) = @_;
@@ -46,6 +36,16 @@ sub log_object
 	return $object;
 
 } # End of log_object.
+
+# -----------------------------------------------
+
+sub write2log
+{
+	my($self, $level, $s) = @_;
+
+	$object -> log(level => $level, message => $s || '');
+
+} # End of write2log.
 
 # --------------------------------------------------
 
@@ -81,7 +81,7 @@ Then:
 
 		$self -> configure_logger($$config{logger});
 
-		$self -> log(debug => 'Hi from sub marine()');
+		$self -> write2log(debug => 'Hi from sub marine()');
 
 	} # End of marine.
 
@@ -89,11 +89,13 @@ Then:
 
 	1;
 
-t/config.logger.ini is used in the test file t/test.t, and also ships with the L<CGI::Snapp::Demo::Four> distro.
+t/config.logger.ini is used in the test file t/test.t, and also ships with the
+L<CGI::Snapp::Demo::Four> distro.
 
 =head1 Description
 
-When you 'use' this module (as in the Synopsis), it automatically imports into your class several methods. See L</Methods> for details.
+When you 'use' this module (as in the Synopsis), it automatically imports into your class
+several methods. See L</Methods> for details.
 
 =head1 Distributions
 
@@ -158,19 +160,21 @@ Supply your log table name, or let it default to 'log'.
 
 =back
 
-=head2 log($level => $message)
-
-Logs $message at $level.
-
-See L<Log::Handler#LOG-LEVELS> and L<Log::Handler::Levels>.
-
 =head2 log_object()
 
 Returns the internal log object, for those cases when you want to pass it to some other class.
 
-See the L<CGI::Snapp::Demo::Four> distro, which contains httpd/cgi-bin/cgi.snapp.demo.four.cgi, which uses L<CGI::Snapp::Demo::Four::Wrapper>.
+See the L<CGI::Snapp::Demo::Four> distro, which contains httpd/cgi-bin/cgi.snapp.demo.four.cgi,
+which uses L<CGI::Snapp::Demo::Four::Wrapper>.
 
-The latter passes this log object to L<CGI::Snapp>'s logger() method, to demonstrate logging a L<CGI> script's method call sequence to a database table.
+The latter passes this log object to L<CGI::Snapp>'s logger() method, to demonstrate logging a
+L<CGI> script's method call sequence to a database table.
+
+=head2 write2log($level => $message)
+
+Logs $message at $level.
+
+See L<Log::Handler#LOG-LEVELS> and L<Log::Handler::Levels>.
 
 =head1 FAQ
 
@@ -192,28 +196,32 @@ See the L<Log::Handler::Plugin::DBI::CreateTable/FAQ>. In pseudo-code:
 	timestamp timestamp not null default current_timestamp +
 	(db_vendor =~ /(?:MySQL|Postgres)/i ? '(0) without time zone' : '')
 
-Also, if you're using MySQL, you might want to set the engine=innodb option.
+Also, if you are using MySQL, you might want to set the engine=innodb option.
 
 See scripts/create.table.pl and scripts/drop.table.pl for an easy way to do all this.
 
 =head2 Can this module be used in any module?
 
-Yes. See t/test.t, which passes undef as the first parameter to each method, because there is no $self available.
+Yes. See t/test.t, which passes undef as the first parameter to each method, because there is no
+$self available.
 
-Alternately, if you 'use' this module within any other module, calling $self -> log() will work.
+Alternately, if you 'use' this module within any other module, calling $self -> write2log() will
+work.
 
-It's used in L<CGI::Snapp::Demo::Four::Wrapper>, which inherits from L<CGI::Snapp::Demo::Four>, which inherits from L<CGI::Snapp>. So, even though L<CGI::Snapp> has its own
-log() method, the one imported from the current module overrides that one.
+It is used in L<CGI::Snapp::Demo::Four::Wrapper>, which inherits from L<CGI::Snapp::Demo::Four>,
+which inherits from L<CGI::Snapp>.
 
-=head2 Why can't I call $log_object -> info($message) etc as with Log::Handler?
+=head2 Why can I not call $log_object -> info($message) etc as with Log::Handler?
 
-Because it's I<not> true that an object of type L<Log::Handler::Output::DBI> (the underlying object here) 'isa' L<Log::Handler>.
+Because it is I<not> true that an object of type L<Log::Handler::Output::DBI> (the underlying
+object here) 'isa' L<Log::Handler>.
 
-=head2 Why don't you 'use Exporter;'?
+=head2 Why do you not 'use Exporter;'?
 
 It is not needed; it would be for documentation only.
 
-For the record, Exporter V 5.567 ships with Perl 5.8.0. That's what I had in Build.PL and Makefile.PL until I tested the fact I can omit it.
+For the record, Exporter V 5.567 ships with Perl 5.8.0. That is what I had in Build.PL and
+Makefile.PL until I tested the fact I can omit it.
 
 =head1 Machine-Readable Change Log
 
