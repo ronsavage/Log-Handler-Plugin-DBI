@@ -3,6 +3,11 @@ package Log::Handler::Plugin::DBI;
 use strict;
 use warnings;
 
+use vars qw(@EXPORT @ISA);
+
+@EXPORT = qw/configure_logger log_object log/;
+@ISA    = ('Exporter');
+
 use Log::Handler::Output::DBI;
 
 my($object);
@@ -29,6 +34,16 @@ sub configure_logger
 
 # -----------------------------------------------
 
+sub log
+{
+	my($self, $level, $s) = @_;
+
+	$object -> log(level => $level, message => $s || '');
+
+} # End of log.
+
+# -----------------------------------------------
+
 sub log_object
 {
 	my($self) = @_;
@@ -36,16 +51,6 @@ sub log_object
 	return $object;
 
 } # End of log_object.
-
-# -----------------------------------------------
-
-sub write2log
-{
-	my($self, $level, $s) = @_;
-
-	$object -> log(level => $level, message => $s || '');
-
-} # End of write2log.
 
 # --------------------------------------------------
 
@@ -70,7 +75,7 @@ Then:
 
 	use File::Spec;
 
-	use Log::Handler::Plugin::DBI; # For configure_logger() and write2log().
+	use Log::Handler::Plugin::DBI; # For configure_logger() and log().
 
 	# ------------------------------------------------
 
@@ -81,7 +86,7 @@ Then:
 
 		$self -> configure_logger($$config{logger});
 
-		$self -> write2log(debug => 'Hi from sub marine()');
+		$self -> log(debug => 'Hi from sub marine()');
 
 	} # End of marine.
 
@@ -160,6 +165,12 @@ Supply your log table name, or let it default to 'log'.
 
 =back
 
+=head2 log($level => $message)
+
+Logs $message at $level.
+
+See L<Log::Handler#LOG-LEVELS> and L<Log::Handler::Levels>.
+
 =head2 log_object()
 
 Returns the internal log object, for those cases when you want to pass it to some other class.
@@ -169,12 +180,6 @@ which uses L<CGI::Snapp::Demo::Four::Wrapper>.
 
 The latter passes this log object to L<CGI::Snapp>'s logger() method, to demonstrate logging a
 L<CGI> script's method call sequence to a database table.
-
-=head2 write2log($level => $message)
-
-Logs $message at $level.
-
-See L<Log::Handler#LOG-LEVELS> and L<Log::Handler::Levels>.
 
 =head1 FAQ
 
@@ -205,7 +210,7 @@ See scripts/create.table.pl and scripts/drop.table.pl for an easy way to do all 
 Yes. See t/test.t, which passes undef as the first parameter to each method, because there is no
 $self available.
 
-Alternately, if you 'use' this module within any other module, calling $self -> write2log() will
+Alternately, if you 'use' this module within any other module, calling $self -> log() will
 work.
 
 It is used in L<CGI::Snapp::Demo::Four::Wrapper>, which inherits from L<CGI::Snapp::Demo::Four>,
@@ -215,13 +220,6 @@ which inherits from L<CGI::Snapp>.
 
 Because it is I<not> true that an object of type L<Log::Handler::Output::DBI> (the underlying
 object here) 'isa' L<Log::Handler>.
-
-=head2 Why do you not 'use Exporter;'?
-
-It is not needed; it would be for documentation only.
-
-For the record, Exporter V 5.567 ships with Perl 5.8.0. That is what I had in Build.PL and
-Makefile.PL until I tested the fact I can omit it.
 
 =head1 Machine-Readable Change Log
 

@@ -5,7 +5,7 @@ use warnings;
 
 use Config::Plugin::Tiny; # For config_tiny().
 
-use Log::Handler::Plugin::DBI; # For configure_logger() and log_object() and write2log().
+use Log::Handler::Plugin::DBI; # For configure_logger() and log_object() and log().
 
 use Test::More tests => 1;
 
@@ -19,4 +19,4 @@ configure_logger(undef, $$config{logger});
 
 isa_ok(log_object(), 'Log::Handler::Output::DBI', 'log_object');
 
-write2log(undef, 'notice', 'One');
+log(undef, 'notice', 'One');
